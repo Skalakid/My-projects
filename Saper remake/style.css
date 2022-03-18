@@ -1,0 +1,108 @@
+* {
+    box-sizing: border-box;
+}
+
+.generuj {
+    width: 200px;
+    height: 40px;
+    font-size: 25px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.time {
+    width: 200px;
+    height: 30px;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 25px;
+}
+
+.text {
+    float: right;
+    height: 30px;
+    font-size: 20px;
+    width: 100px;
+    margin-top: 10px;
+}
+
+.pole {
+    width: 200px;
+    height: 40px;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 20px;
+}
+
+#map {
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    background: red;
+}
+
+.mapArea {
+    position: absolute;
+    background-image: url("./img/klepa.PNG");
+    background-size: 30px;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    font-size: 25px;
+    text-align: center;
+}
+
+#highscores {
+    position: absolute;
+    background: lightgray;
+    top: 10px;
+    left: 10px;
+    border: 2px solid black;
+}
+
+.highscoresNav {
+    position: relative;
+    top: 0;
+    left: 0;
+    background: grey;
+    border-bottom: 2px solid black;
+    text-align: center;
+    font-size: 25px;
+}
+
+.sel {
+    position: relative;
+    top: 5px;
+    display: block;
+    float: left;
+    font-size: 15px;
+    text-align: center;
+}
+
+#top {
+    margin-top: 30px;
+    font-size: 20px;
+}
+
+.topTen {
+    display: block;
+}
+
+.topTenNr {
+    display: inline;
+    margin-left: 5px;
+}
+
+.topTenNick {
+    display: inline;
+    position: relative;
+    left: 10px;
+}
+
+.topTenTime {
+    display: inline;
+    float: right;
+    margin-right: 5px;
+}

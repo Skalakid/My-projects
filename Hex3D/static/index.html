@@ -1,0 +1,193 @@
+<!-- Hex3D home page / level creator -->
+<!-- author: Michał Skałka -->
+
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level editor</title>
+    <link rel="stylesheet" href="homePage.css">
+    <script src="jquery.js"></script>
+    <script src="Hex.js"></script>
+    <script>
+        $(document).ready(function () {
+            // toggle responsive navbar
+            const navBarLinks = document.getElementsByClassName('navbar-links')[0]
+            $("#toggle-button").on("click", function () {
+                navBarLinks.classList.toggle('active')
+            })
+
+            // toggle info panel
+            $(".info").on("click", function () {
+                $("#panel-info").toggle('slow')
+                $(".info").toggle()
+            })
+
+            // toggle console panel
+            $(".console").on("click", function () {
+                $("#panel-console").toggle('slow')
+                $(".console").toggle()
+            })
+
+            // building 2D map of hexes that are used in level creator depending on size in select box
+            var hex = new Hex()
+            $("#sel1").change(function () {
+                hex.clearMap()
+                hex.builtMap()
+            })
+            
+            // Saving project (#btSave)
+            // sends "save" reqest to server, than save the project.
+            $("#btSave").on("click", function () {
+                console.log(hex.level);
+                var name = prompt("Name your level save:")
+                if (name) {
+                    var obj = JSON.stringify(hex.level)
+                    $.ajax({
+                        url: "/",
+                        data: { action: "save", lvl: obj, name: name },
+                        type: "POST",
+                        success: function (data) {
+                            // console.log(data);
+                            var obj = JSON.parse(data)
+                            confirm("Level successfully saved!")
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(xhr);
+                        },
+                    });
+                }
+            })
+
+            // Loading saved levels (#btLoad)
+            // sends "load" reqest to the server.
+            // Server sends back list of saved levels as a list of objects (name + saved code of the level).
+            // Next, it creates menu, where the user can choose level to load.
+            // 
+            $("#btLoad").on("click", function () {
+                $.ajax({
+                    url: "/",
+                    data: { action: "load" },
+                    type: "POST",
+                    success: function (data) {
+                        var obj = JSON.parse(data)
+                        console.log(obj);
+                        // Creating menu
+                        $("#loadMenu").empty()
+                        $("#loadMenu").text("Choose save:")
+                        var menu = document.getElementById("loadMenu")
+                        for (let i = 0; i < obj.loaded.length; i++) {
+                            var div = document.createElement("div")
+                            div.innerHTML = obj.loaded[i].name
+                            div.dataset.id = i
+                            div.className = "loadMenuItem"
+                            menu.appendChild(div)
+                        }
+                        $("#loadMenu-panel").toggle("slow");
+                        $("#menu").css("display: flex");
+
+                        $(".loadMenuItem").on("click", function () {
+                            // $("#loadMenu").css("display", "none")
+                            // $("#loadMenu").empty()
+                            // console.log(JSON.parse(obj.loaded[this.dataset['id']].lvl));
+                            $("#hex-panel").empty()
+                            hex.builtMap(JSON.parse(obj.loaded[this.dataset['id']].lvl)) // building map by using saved code of the level
+                            $("#loadMenu-panel").toggle("slow");
+                        })
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(xhr);
+                    },
+                });
+            })
+
+        })
+
+    </script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="title">Hex3D</div>
+        <a href="#" id="toggle-button">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </a>
+        <div class="navbar-links">
+            <ul>
+                <li><a class="navBarItem" href="/hex">GO TO HEX!</a></li>
+                <li><a class="navBarItem" href="/movement">SIMPLE PLAYER MOVEMENT</a></li>
+                <li><a class="navBarItem" href="/ally">SIMPLE ALLY MOVEMENT</a></li>
+                <li><a class="navBarItem" href="/allies">SIMPLE ALLIES MOVEMENT</a></li>
+                <li><a class="navBarItem" href="/allymodel">ALLY MODEL MOVEMENT</a></li>
+                <li><a id="startButton" class="navBarItem" href="/game">GO TO GAME!</a></li>
+        </div>
+    </nav>
+
+    <div id="left">
+        <select name="select1" id="sel1">
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+        </select>
+
+        <input id="btSave" class="menuItem" type="submit" value="Save">
+        <input id="btLoad" class="menuItem" type="submit" value="Load">
+        <br>
+        <div class="type" id="walls">Wall</div>
+        <div class="type" id="ally">Ally</div>
+        <div class="type" id="treasure">Treasure</div>
+        <div class="type" id="light">Light</div>
+    </div>
+
+    <div id="right">
+        <div id="loadMenu-panel">
+            <div id="loadMenu"></div>
+        </div>
+
+        <div id="hex-panel"></div>
+    </div>
+
+
+    <div id="popup-menu">
+        <div id="icons">
+            <div class="icon info">i</div>
+            <div class="icon info" style="display: none;">X</div>
+            <div class="icon console">c</div>
+            <div class="icon console" style="display: none;">X</div>
+        </div>
+        <div id="panel-info">
+            <div class="content">
+                <p>Hex3D is an application that lets you make 2D plan of hex-level and than crate it in 3D!</p>
+                <br>
+                <h1>How it works?</h1>
+                <p>1. Select size of your level: </p>
+                <img class="gif" src="./gifs/first.gif" alt="Selecting size of the level">
+                <br><br>
+                <p>2. Mark your level path <string>one by one</string>, by clicking on the hexagons (it is important to make
+                    it in correct order - from start to finish)</p>
+                <img class="gif" src="./gifs/second.gif" alt="Selecting size of the level">
+                <br><br>
+            </div>
+        </div>
+
+        <div id="panel-console">
+            <h2>console:</h2>
+            <div id="console" class="content">
+                
+            </div>
+        </div>
+    </div>
+
+    <div id="hexagon"></div>
+
+</body>
+
+</html>

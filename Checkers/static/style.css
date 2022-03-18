@@ -1,0 +1,113 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
+}
+
+em {
+    color: white
+}
+
+#shadow {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    opacity: 0.5;
+    z-index: 1;
+}
+
+#topMenu {
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    background: green;
+    border-bottom: 2px solid lime;
+    color: lime;
+    z-index: 0;
+}
+
+#status {
+    font-size: 30px;
+    margin: 10px 0 10px 10px;
+}
+
+#info {
+    font-size: 25px;
+    margin: 0 0 0 10px;
+}
+
+#center {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#centerMenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+    height: 400px;
+    border: 2px solid lime;
+    border-radius: 30px;
+    z-index: 2;
+    color: lime;
+    font-size: 40px;
+}
+
+#centerMenu>p {
+    margin: 30px 0 30px 0;
+}
+
+#centerMenu>input {
+    border: 2px solid lime;
+    background: none;
+    color: white;
+    border-radius: 30px;
+    width: 300px;
+    height: 50px;
+    text-align: center;
+    font-size: 40px;
+}
+
+.button {
+    margin-top: 30px;
+    background: lime;
+    color: black;
+    border-radius: 30px;
+    width: 300px;
+    height: 50px;
+    font-size: 30px;
+    text-align: center;
+    line-height: 50px;
+    user-select: none;
+    cursor: pointer;
+}
+
+#loading, #roundloading {
+    display: none;
+    position: absolute;
+    z-index: 2;
+    color: lime;
+    font-size: 40px;
+    text-align: center;
+    width: 600px;
+}
+
+#info1 {
+    width: 100px;
+    height: 50px;
+    font-size: 30px;
+    line-height: 50px;
+    position: absolute;
+    background: green;
+    bottom: 0;
+    left: 10px;
+    color: white;
+    text-align: center;
+}

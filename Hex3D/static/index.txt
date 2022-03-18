@@ -1,0 +1,94 @@
+<div id="right"></div>
+    <div id="console-popup">
+        <div class="console-symbol">c</div>
+        <div id="console"></div>
+    </div>
+    
+
+    <div id="info">
+        <div class="info-symbol">i</div>
+        <div class="info-symbol" style="display: none;">X</div>
+        <div class="popup">
+            <div class="popup-content">
+                <p>Hex3D is an application that lets you make 2D plan of hex-level and than crate it in 3D!</p>
+                <br>
+                <h1>How it works?</h1>
+                <p>1. Select size of your level: </p>
+                <img class="gif" src="./gifs/first.gif" alt="Selecting size of the level">
+                <br><br>
+                <p>2. Mark your level path <string>one by one</string>, by clicking on the hexagons (it is important to make it in correct order - from start to finish)</p>
+                <img class="gif" src="./gifs/second.gif" alt="Selecting size of the level">
+                <br><br>
+            </div>
+        </div>
+    </div>
+
+
+    #info, #console-popup {
+    position: absolute;
+    right:0;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.info-symbol {
+    position: relative;
+    top: 20px;
+    right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    background: royalblue;
+    color: white;
+}
+
+.info-symbol:hover {
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    font-size: 30px;
+    transition: 0.5s;
+}
+
+.popup {
+    display: none;
+    position: relative;
+    height: 100%;
+    width:50%;
+    background: royalblue;
+}
+
+.popup-content {
+    color: white;
+    height: 200px;
+    margin: 20px;
+
+}
+
+.gif {
+    width: 100%;
+}
+
+.console-symbol {
+    z-index: 0;
+    position: relative;
+    top: 70px;
+    right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    background: white;
+    color: black;
+}
+
+.console-symbol:hover {
+    background-color: red;
+}

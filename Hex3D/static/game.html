@@ -1,0 +1,111 @@
+<!-- Hex3D game  -->
+<!-- author: Michał Skałka -->
+
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game3D</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #menu {
+            background: royalblue;
+            width: 30%;
+            height: 50%;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-direction: column;
+            z-index: 2;
+            font-size: 2vw;
+            color: white;
+            overflow: auto;
+            border-radius: 10px;
+
+        }
+
+        .menuItem {
+            width: 80%;
+            height: auto;
+            background: none;
+            margin-top: 5px;
+            font-size: 1.5vw;
+            margin-bottom: 5px;
+            border: 2px solid white;
+            line-height: 2vw;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .menuItem:hover {
+            background: hsl(225, 56%, 38%);
+            transition: 0.3s;
+            font-size: 1.6vw;
+        }
+
+        #position {
+            position: absolute;
+        }
+
+        #intensity {
+            position: absolute;
+            left: 210px;
+        }
+
+        #loading {
+            position: absolute;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            background: rgb(28,28,28);;
+            color: royalblue;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #loading_text {
+            font-size: 50px;
+        }
+    </style>
+    <script src="jquery.js"></script>
+    <script src="three_97.js"></script>
+    <script src="OrbitControls.js"></script>
+    <script src="level3D/Treasure.js"></script>
+    <script src="level3D/Hex3D.js"></script>
+    <script src="level3D/Doors3D.js"></script>
+    <script src="level3D/Level3D.js"></script>
+    <script src="level3D/Light.js"></script>
+    <script src="level3D/Ui.js"></script>
+    <script src="level3D/Model.js"></script>
+    <script src="level3D/AllyModel.js"></script>
+    <script src="level3D/Ring.js"></script>
+    <script src="level3D/Main3D.js"></script>
+    <script src="Settings.js"></script>
+</head>
+
+<body>
+    <div id="loading">
+        <div id="menu"></div>
+        <p id="loading_text"></p>
+    </div>
+
+    <input type="range" name="ran1" id="position" min="0" max="300" value="200">
+    <input type="range" name="ran1" id="intensity" step="0.01" min="0" max="1" value="0.5">
+    
+    <div id="root"></div>
+</body>
+
+</html>
